@@ -3,15 +3,18 @@ import tkinter as tk
 janela = tk.Tk()
 janela.title("Mini Paint")
 
+#cor base
 cor_atual = "black"
 
 canvas = tk.Canvas(janela, bg="white", width=600, height=400)
 canvas.pack()
 
+# funcao para mudar a cor do retangulo
 def mudar_cor(cor):
     global cor_atual
     cor_atual = cor
 
+#quando o mouse é pressionado
 def inicia_retangulo(event):
     global ini_x, ini_y
     ini_x = event.x
@@ -42,6 +45,7 @@ canvas.bind("<ButtonRelease-1>", incluir_retangulo)
 frame = tk.Frame(janela)
 frame.pack()
 
+#menu das cores
 tk.Button(frame, text="Preto",
           bg="black", fg="white",
           command=lambda: mudar_cor("black")).pack(side="left")
