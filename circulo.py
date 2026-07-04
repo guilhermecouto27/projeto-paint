@@ -1,6 +1,6 @@
-from dataclasses import dataclass
-
 from figuras import Figura
+from dataclasses import dataclass, field
+
 @dataclass
 class Circulo(Figura) : # cria o círculo
 
@@ -9,6 +9,7 @@ class Circulo(Figura) : # cria o círculo
     x2: int
     y2: int
     cor: str="black"
+    cor_preenchimento: str=""
 
     @property
     def pontos(self):
@@ -19,7 +20,7 @@ class Circulo(Figura) : # cria o círculo
     
     def desenha(self, canvas, preview=False):
         tag = "preview" if preview else ""
-        canvas.create_oval(*self.pontos, tags=tag, outline = self.cor)
+        canvas.create_oval(*self.pontos, tags=tag, outline = self.cor, fill=self.cor_preenchimento if self.cor_preenchimento else "")
 
     def vazia(self):
         return (self.x1, self.y1) == (self.x2, self.y2)
