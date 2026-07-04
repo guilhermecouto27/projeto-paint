@@ -12,11 +12,11 @@ class CriarPaint(tk.Tk):
 
         self.title("Paint da Mi e do Gui")
 
+        self.formato_principal = "retangulo"
+
         self.x = None
         self.y = None
         self.fig = None
-
-        self.formato_principal = "retangulo"
 
         # cor da borda
         self.cor_principal = "black"
@@ -37,6 +37,9 @@ class CriarPaint(tk.Tk):
         self.criar_menu()
 
     def inicio_mouse(self, event):
+
+        if event.y < 0 :
+            return 
         self.x = event.x
         self.y = event.y
 
@@ -44,6 +47,10 @@ class CriarPaint(tk.Tk):
             self.pontos_rabisco = [(self.x , self.y)]
 
     def movimento_mouse(self, event):
+
+        if self.x is None or self.y is None :
+            return 
+        
         self.desenhar()
 
         if self.formato_principal ==  "rabisco" :
@@ -57,6 +64,7 @@ class CriarPaint(tk.Tk):
             self.fig.desenha(self.canvas, preview =True)
 
     def soltar_mouse(self, event):
+        self.canvas.delete("preview")
 
         self.canvas.delete("temporario")
 
