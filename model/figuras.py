@@ -1,6 +1,4 @@
 from abc import ABC, abstractmethod
-
-from dataclasses import dataclass, field
 #criando a classe principal FIGURA para que os mesmos métodos dela sejam utilizados nas outras classes(que também são figuras)
 class Figura(ABC):
     @abstractmethod

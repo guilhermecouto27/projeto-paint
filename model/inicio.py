@@ -1,5 +1,5 @@
 import tkinter as tk
-from figuras import Linha, Rabisco, Circulo, Retangulo, Oval
+from model.figuras import Linha, Rabisco, Circulo, Retangulo, Oval
 
 class criar_paint(tk.Tk) :
 

@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from figuras import Figura
+from model.figuras import Figura
 
 @dataclass
 class Retangulo(Figura) : # cria o retângulo

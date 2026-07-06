@@ -1,4 +1,4 @@
-from figuras import Figura
+from model.figuras import Figura
 from dataclasses import dataclass, field
 
 @dataclass

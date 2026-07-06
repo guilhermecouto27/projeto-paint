@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from figuras import Figura
+from model.figuras import Figura
 
 @dataclass
 class Linha(Figura):
