@@ -1,10 +1,10 @@
 import tkinter as tk
-from circulo import Circulo
-from rabisco import Rabisco
-from oval import Oval
-from retangulo import Retangulo
-from linha import Linha
-from figuras import Figura
+from model.circulo import Circulo
+from model.rabisco import Rabisco
+from model.oval import Oval
+from model.retangulo import Retangulo
+from model.linha import Linha
+from model.figuras import Figura
 
 class CriarPaint(tk.Tk):
     def __init__(self):
@@ -165,6 +165,6 @@ class CriarPaint(tk.Tk):
             )
 
 
-if __name__ == "__main__":
-    janela = CriarPaint()
-    janela.mainloop()
+
+janela = CriarPaint()
+janela.mainloop()
