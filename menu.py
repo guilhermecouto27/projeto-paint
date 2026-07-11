@@ -1,10 +1,7 @@
 import tkinter as tk
-from model.circulo import Circulo
-from model.rabisco import Rabisco
-from model.oval import Oval
-from model.retangulo import Retangulo
-from model.linha import Linha
-from model.figuras import Figura
+from model.desenho import Desenho
+from model.figuras import Linha, Retangulo, Oval, Circulo, Rabisco
+from view.janelaPaint import PaintView
 
 class CriarPaint(tk.Tk):
     def __init__(self):
