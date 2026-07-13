@@ -1,5 +1,5 @@
 import tkinter as tk
-from model.desenho import Desenho
+from model.desenho import Desenhar
 from model.figuras import Linha, Retangulo, Oval, Circulo, Rabisco
 from view.janelaPaint import PaintView
 
