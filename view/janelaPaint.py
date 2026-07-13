@@ -1,6 +1,8 @@
 import tkinter as tk
+from tkinter import filedialog
 
-#class PaintView é a classe que representa a interface gráfica do usuário (GUI) do aplicativo de desenho
+
+# class PaintView é a classe que representa a interface gráfica do usuário (GUI) do aplicativo de desenho
 class PaintView(tk.Tk):
 
     def __init__(self):
@@ -41,8 +43,33 @@ class PaintView(tk.Tk):
     def criar_menu(self):
 
         menu = tk.Menu(self)
-
         self.config(menu=menu)
+
+        # ---------------- ARQUIVO ----------------
+
+        menu_arquivo = tk.Menu(menu, tearoff=0)
+
+        menu.add_cascade(
+            label="Arquivo",
+            menu=menu_arquivo
+        )
+
+        menu_arquivo.add_command(
+            label="Salvar",
+            command=self.salvar_arquivo
+        )
+
+        menu_arquivo.add_command(
+            label="Abrir",
+            command=self.abrir_arquivo
+        )
+
+        menu_arquivo.add_separator()
+
+        menu_arquivo.add_command(
+            label="Sair",
+            command=self.destroy
+        )
 
         # ---------------- FIGURAS ----------------
 
@@ -56,46 +83,105 @@ class PaintView(tk.Tk):
         for lab, val in [
 
             ("Retângulo", "retangulo"),
+            ("Quadrado", "quadrado"),
             ("Círculo", "circulo"),
             ("Oval", "oval"),
             ("Linha", "linha"),
-            ("Rabisco", "rabisco"),
-            ("Quadrado","quadrado")]:
+            ("Rabisco", "rabisco")
 
-            mf.add_radiobutton( label=lab, variable=self.fig_var, value=val,)
+        ]:
+
+            mf.add_radiobutton(
+                label=lab,
+                variable=self.fig_var,
+                value=val
+            )
 
         # ---------------- BORDA ----------------
 
         mb = tk.Menu(menu, tearoff=0)
 
-        menu.add_cascade(label="Cor da borda", menu=mb)
-
-        for nome, cor in [("Preto", "black"),
-            ("Vermelho", "red"),
-            ("Azul", "blue"),
-            ("Verde", "green")]:
-
-            mb.add_command(label=nome, command=lambda c=cor: self.controller.mudar_cor(c))
-
-        # ---------------- PREENCHIMENTO ----------------
-
-        mp = tk.Menu(menu, tearoff=0)
-
-        menu.add_cascade(label="Preenchimento", menu=mp)
-
-        mp.add_command(
-
-            label="Sem preenchimento",
-
-            command=lambda:
-                self.controller.mudar_preenchimento(""))
+        menu.add_cascade(
+            label="Cor da borda",
+            menu=mb
+        )
 
         for nome, cor in [
 
             ("Preto", "black"),
             ("Vermelho", "red"),
             ("Azul", "blue"),
-            ("Verde", "green")]:
+            ("Verde", "green")
 
-            mp.add_command(label=nome, command=lambda c=cor:
-                    self.controller.mudar_preenchimento(c))
+        ]:
+
+            mb.add_command(
+                label=nome,
+                command=lambda c=cor: self.controller.mudar_cor(c)
+            )
+
+        # ---------------- PREENCHIMENTO ----------------
+
+        mp = tk.Menu(menu, tearoff=0)
+
+        menu.add_cascade(
+            label="Preenchimento",
+            menu=mp
+        )
+
+        mp.add_command(
+            label="Sem preenchimento",
+            command=lambda: self.controller.mudar_preenchimento("")
+        )
+
+        for nome, cor in [
+
+            ("Preto", "black"),
+            ("Vermelho", "red"),
+            ("Azul", "blue"),
+            ("Verde", "green")
+
+        ]:
+
+            mp.add_command(
+                label=nome,
+                command=lambda c=cor:
+                    self.controller.mudar_preenchimento(c)
+            )
+
+    # -------------------------------------------------
+    # Arquivo
+    # -------------------------------------------------
+
+    def salvar_arquivo(self):
+
+        if self.controller is None:
+            return
+
+        caminho = filedialog.asksaveasfilename(
+            title="Salvar desenho",
+            defaultextension=".pickle",
+            filetypes=[
+                ("Arquivos Paint", "*.pickle"),
+                ("Todos os arquivos", "*.*")
+            ]
+        )
+
+        if caminho:
+            self.controller.salvar(caminho)
+
+    def abrir_arquivo(self):
+
+        if self.controller is None:
+            return
+
+        caminho = filedialog.askopenfilename(
+            title="Abrir desenho",
+            filetypes=[
+                ("Arquivos Paint", "*.pickle"),
+                ("Todos os arquivos", "*.*")
+            ]
+        )
+
+        if caminho:
+            self.controller.abrir(caminho)

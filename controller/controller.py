@@ -61,4 +61,15 @@ class ControladorPaint:
 
         self.desenho.mudar_preenchimento(cor)
 
+    # Salva o desenho em um arquivo
+    def salvar(self, caminho):
+        self.desenho.salvar(caminho)
+
+    # Abre um desenho salvo
+    def abrir(self, caminho):
+        self.desenho.abrir(caminho)
+
+        # redesenha o canvas
+        self.desenho.desenha_figuras(self.visao.canvas)
+
 

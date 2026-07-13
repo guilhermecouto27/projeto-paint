@@ -1,3 +1,5 @@
+import pickle
+
 class PaintModel:
 
     def __init__(self):
@@ -45,3 +47,13 @@ class PaintModel:
         canvas.delete("all")
         for figura in self.__formas:
             figura.desenha(canvas, dash=dash)
+
+    # Persistência com pickle
+
+    def salvar(self, caminho):
+        with open(caminho, "wb") as arquivo:
+            pickle.dump(self.__formas, arquivo)
+
+    def abrir(self, caminho):
+        with open(caminho, "rb") as arquivo:
+            self.__formas = pickle.load(arquivo)
