@@ -32,11 +32,7 @@ class Linha(Figura):
 
     def desenha(self, canvas, dash=()):
         if not self.vazia():
-            canvas.create_line(
-                self.pontos,
-                fill=self.cor,
-                dash=dash
-            )
+            canvas.create_line(self.pontos, fill=self.cor, dash=dash)
 
     def vazia(self):
         return self.x1 == self.x2 and self.y1 == self.y2
@@ -49,11 +45,7 @@ class Rabisco(Figura):
 
     def desenha(self, canvas, dash=()):
         if len(self.pontos) >= 4:
-            canvas.create_line(
-                self.pontos,
-                fill=self.cor,
-                dash=dash
-            )
+            canvas.create_line(self.pontos, fill=self.cor, dash=dash)
 
     def vazia(self):
         return len(self.pontos) < 4
@@ -68,8 +60,10 @@ class Retangulo(Figura):
         canvas.create_rectangle(self.x1,self.y1,self.x2,self.y2,outline=self.cor,fill=self.preenchimento,dash=dash)
 
     def vazia(self):
-        return (self.x1,self.y1)==(self.x2,self.y2)
-
+        largura = abs(self.x2 - self.x1)
+        altura = abs(self.y2 - self.y1)
+        return largura < 3 or altura < 3
+    
 class Quadrado(Retangulo):
 
     def __init__(self, x1, y1, x2, y2, cor="black", preenchimento=""):
@@ -90,6 +84,10 @@ class Quadrado(Retangulo):
 class Oval(Retangulo):
     def desenha(self,canvas,dash=()):
         canvas.create_oval(self.x1,self.y1,self.x2,self.y2,outline=self.cor,fill=self.preenchimento,dash=dash)
+    def vazia(self) :
+        largura = abs(self.x2 - self.x1)
+        altura = abs(self.y2 - self.y1)
+        return largura < 3 or altura < 3
 
 
 class Circulo(Retangulo):

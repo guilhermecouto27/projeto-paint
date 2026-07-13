@@ -27,9 +27,9 @@ class PaintView(tk.Tk):
 
         self.controller = controller
 
-        self.canvas.bind("<Button-1>", self.controller.inicio_mouse)
-        self.canvas.bind("<B1-Motion>", self.controller.movimento_mouse)
-        self.canvas.bind("<ButtonRelease-1>", self.controller.soltar_mouse)
+        self.canvas.bind("<Button-1>", self.controller.mouse_pressionado)
+        self.canvas.bind("<B1-Motion>", self.controller.mouse_arrastado)
+        self.canvas.bind("<ButtonRelease-1>", self.controller.mouse_solto)
 
     def desenhar(self, formas):
 
@@ -60,88 +60,42 @@ class PaintView(tk.Tk):
             ("Oval", "oval"),
             ("Linha", "linha"),
             ("Rabisco", "rabisco"),
-            ("Quadrado","quadrado")
+            ("Quadrado","quadrado")]:
 
-        ]:
-
-            mf.add_radiobutton(
-
-                label=lab,
-
-                variable=self.fig_var,
-
-                value=val,
-
-                command=lambda v=val:
-                    self.controller.mudar_forma(v)
-
-            )
+            mf.add_radiobutton( label=lab, variable=self.fig_var, value=val,)
 
         # ---------------- BORDA ----------------
 
         mb = tk.Menu(menu, tearoff=0)
 
-        menu.add_cascade(
+        menu.add_cascade(label="Cor da borda", menu=mb)
 
-            label="Cor da borda",
-
-            menu=mb
-
-        )
-
-        for nome, cor in [
-
-            ("Preto", "black"),
+        for nome, cor in [("Preto", "black"),
             ("Vermelho", "red"),
             ("Azul", "blue"),
-            ("Verde", "green")
+            ("Verde", "green")]:
 
-        ]:
-
-            mb.add_command(
-
-                label=nome,
-
-                command=lambda c=cor:
-                    self.controller.mudar_cor(c)
-
-            )
+            mb.add_command(label=nome, command=lambda c=cor: self.controller.mudar_cor(c))
 
         # ---------------- PREENCHIMENTO ----------------
 
         mp = tk.Menu(menu, tearoff=0)
 
-        menu.add_cascade(
-
-            label="Preenchimento",
-
-            menu=mp
-
-        )
+        menu.add_cascade(label="Preenchimento", menu=mp)
 
         mp.add_command(
 
             label="Sem preenchimento",
 
             command=lambda:
-                self.controller.mudar_preenchimento("")
-
-        )
+                self.controller.mudar_preenchimento(""))
 
         for nome, cor in [
 
             ("Preto", "black"),
             ("Vermelho", "red"),
             ("Azul", "blue"),
-            ("Verde", "green")
+            ("Verde", "green")]:
 
-        ]:
-
-            mp.add_command(
-
-                label=nome,
-
-                command=lambda c=cor:
-                    self.controller.mudar_preenchimento(c)
-
-            )
+            mp.add_command(label=nome, command=lambda c=cor:
+                    self.controller.mudar_preenchimento(c))

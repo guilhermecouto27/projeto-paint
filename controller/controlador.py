@@ -33,21 +33,11 @@ class PaintController:
 
             self.model.pontos_rabisco.append((event.x, event.y))
 
-            self.model.fig = Rabisco(
-                self.model.pontos_rabisco,
-                self.model.cor_principal
-            )
+            self.model.fig = Rabisco(self.model.pontos_rabisco, self.model.cor_principal)
 
         else:
 
-            self.model.fig = self.criar_figura(
-
-                self.model.x,
-                self.model.y,
-                event.x,
-                event.y
-
-            )
+            self.model.fig = self.criar_figura(self.model.x, self.model.y, event.x, event.y)
 
         if self.model.fig:
             self.model.fig.desenha(self.view.canvas)
@@ -58,37 +48,17 @@ class PaintController:
 
             self.model.pontos_rabisco.append((event.x, event.y))
 
-            self.model.fig = Rabisco(
-
-                self.model.pontos_rabisco,
-
-                self.model.cor_principal
-
-            )
+            self.model.fig = Rabisco(self.model.pontos_rabisco, self.model.cor_principal)
 
             self.model.pontos_rabisco = []
 
         else:
 
-            self.model.fig = self.criar_figura(
-
-                self.model.x,
-
-                self.model.y,
-
-                event.x,
-
-                event.y
-
-            )
+            self.model.fig = self.criar_figura(self.model.x, self.model.y, event.x, event.y)
 
         if self.model.fig and not self.model.fig.vazia():
 
-            self.model.formas.append(
-
-                self.model.fig
-
-            )
+            self.model.formas.append(self.model.fig)
 
         self.view.desenhar(self.model.formas)
 
@@ -99,64 +69,27 @@ class PaintController:
 
         if self.model.formato_principal == "linha":
 
-            return Linha(
-                x1,
-                y1,
-                x2,
-                y2,
-                self.model.cor_principal
-            )
+            return Linha(x1, y1, x2, y2, self.model.cor_principal)
 
         elif self.model.formato_principal == "rabisco":
 
-            return Rabisco(
-                self.model.pontos_rabisco,
-                self.model.cor_principal
-            )
+            return Rabisco(self.model.pontos_rabisco, self.model.cor_principal)
 
         elif self.model.formato_principal == "retangulo":
 
-            return Retangulo(
-                x1,
-                y1,
-                x2,
-                y2,
-                self.model.cor_principal,
-                self.model.cor_preenchimento
-            )
+            return Retangulo(x1, y1,  x2, y2, self.model.cor_principal, self.model.cor_preenchimento)
         
         elif self.model.formato_principal == "quadrado":
 
-            return Quadrado(
-            x1,
-            y1,
-            x2,
-            y2,
-            self.model.cor_principal,
-            self.model.cor_preenchimento
-            )
+            return Quadrado(x1, y1, x2, y2, self.model.cor_principal,self.model.cor_preenchimento)
 
         elif self.model.formato_principal == "oval":
 
-            return Oval(
-                x1,
-                y1,
-                x2,
-                y2,
-                self.model.cor_principal,
-                self.model.cor_preenchimento
-            )
+            return Oval(x1, y1, x2, y2, self.model.cor_principal, self.model.cor_preenchimento)
 
         elif self.model.formato_principal == "circulo":
 
-            return Circulo(
-                x1,
-                y1,
-                x2,
-                y2,
-                self.model.cor_principal,
-                self.model.cor_preenchimento
-            )
+            return Circulo(x1, y1, x2, y2, self.model.cor_principal, self.model.cor_preenchimento)
 
         return None
 

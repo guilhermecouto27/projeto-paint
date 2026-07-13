@@ -1,17 +1,17 @@
 from model.desenho import PaintModel
 from view.janelaPaint import PaintView
-from controller.controlador import PaintController
+from controller.controller import ControladorPaint
 
 
 def main():
 
-    model = PaintModel()
+    desenho = PaintModel()
 
-    view = PaintView()
+    visao = PaintView()
 
-    controller = PaintController(model, view)
+    controller = ControladorPaint(visao, desenho)
 
-    view.mainloop()
+    visao.mainloop()
 
 
 main()

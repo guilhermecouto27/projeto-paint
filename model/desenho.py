@@ -19,7 +19,7 @@ class PaintModel:
         self.cor_preenchimento = ""
 
         # figuras desenhadas
-        self.formas = []
+        self.__formas = []
 
         # pontos do rabisco
         self.pontos_rabisco = []
@@ -32,3 +32,11 @@ class PaintModel:
 
     def mudar_forma(self, forma):
         self.formato_principal = forma
+    
+    def adiciona_figura(self, figura):
+        self.__formas.append(figura)
+
+    def desenha_figuras(self, canvas, dash=()):
+        canvas.delete("all")
+        for figura in self.__formas:
+            figura.desenha(canvas, dash=dash)
