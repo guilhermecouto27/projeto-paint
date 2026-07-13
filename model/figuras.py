@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-
+# class Figura é uma classe abstrata que define a interface para todas as figuras geométricas
 class Figura(ABC):
 
     def __init__(self, cor, preenchimento=""):
@@ -16,7 +16,7 @@ class Figura(ABC):
         pass
 
 
-
+#subclasse de figura que representa uma linha
 class Linha(Figura):
 
     def __init__(self, x1, y1, x2, y2, cor="black", preenchimento=""):
@@ -37,6 +37,7 @@ class Linha(Figura):
     def vazia(self):
         return self.x1 == self.x2 and self.y1 == self.y2
 
+#subclasse de figura que representa um rabisco
 class Rabisco(Figura):
 
     def __init__(self, pontos=None, cor="black", preenchimento=""):
@@ -50,6 +51,7 @@ class Rabisco(Figura):
     def vazia(self):
         return len(self.pontos) < 4
 
+#subclasse de figura que representa um retângulo
 class Retangulo(Figura):
 
     def __init__(self,x1,y1,x2,y2,cor="black",preenchimento=""):
@@ -63,7 +65,8 @@ class Retangulo(Figura):
         largura = abs(self.x2 - self.x1)
         altura = abs(self.y2 - self.y1)
         return largura < 3 or altura < 3
-    
+
+#subclasse de figura que representa um quadrado
 class Quadrado(Retangulo):
 
     def __init__(self, x1, y1, x2, y2, cor="black", preenchimento=""):
@@ -81,6 +84,7 @@ class Quadrado(Retangulo):
 
         super().__init__(x1, y1, x2, y2, cor, preenchimento)
 
+#subclasse de figura que representa um oval
 class Oval(Retangulo):
     def desenha(self,canvas,dash=()):
         canvas.create_oval(self.x1,self.y1,self.x2,self.y2,outline=self.cor,fill=self.preenchimento,dash=dash)
@@ -89,7 +93,7 @@ class Oval(Retangulo):
         altura = abs(self.y2 - self.y1)
         return largura < 3 or altura < 3
 
-
+#subclasse de figura que representa um círculo
 class Circulo(Retangulo):
     def desenha(self,canvas,dash=()):
         r=min(abs(self.x2-self.x1),abs(self.y2-self.y1))

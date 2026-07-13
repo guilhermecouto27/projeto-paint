@@ -6,6 +6,7 @@ from model.figuras import Linha, Oval, Circulo, Quadrado, Retangulo, Rabisco
 from model.desenho import PaintModel
 
 @dataclass
+# Ferramenta abstrata para desenho
 class Ferramenta(ABC) :
     visao : PaintView
     desenho : PaintModel

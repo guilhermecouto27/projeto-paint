@@ -24,18 +24,23 @@ class PaintModel:
         # pontos do rabisco
         self.pontos_rabisco = []
 
+    # métodos para manipular as figuras desenhadas
     def mudar_cor(self, cor):
         self.cor_principal = cor
 
+    # métodos para manipular as figuras desenhadas
     def mudar_preenchimento(self, cor):
         self.cor_preenchimento = cor
 
+    # métodos para manipular as figuras desenhadas
     def mudar_forma(self, forma):
         self.formato_principal = forma
     
+    # métodos para manipular as figuras desenhadas
     def adiciona_figura(self, figura):
         self.__formas.append(figura)
 
+    # métodos para manipular as figuras desenhadas
     def desenha_figuras(self, canvas, dash=()):
         canvas.delete("all")
         for figura in self.__formas:

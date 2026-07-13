@@ -5,7 +5,7 @@ from model.figuras import *
 from model.desenho import *
 from controller.ferramenta import *
 
-
+# ControladorPaint é a classe que representa o controlador do aplicativo de desenho
 @dataclass
 class ControladorPaint:
     visao : PaintView
@@ -38,19 +38,25 @@ class ControladorPaint:
         self.ferramenta_desenho = self.ferramentas[figura]
  
  ########### Eventos do mouse despachados para a ferramenta de desenho ##############
+    
+    #quando o mouse é pressionado, a posição inicial do desenho é armazenada
     def mouse_pressionado(self, event): 
         self.ferramenta_desenho.mouse_pressionado(event)
 
+    #quando o mouse é arrastado, a figura é redesenhada no canvas
     def mouse_arrastado(self, event):
         self.ferramenta_desenho.mouse_arrastado(event)
 
+    #quando o mouse é solto, a figura é adicionada à lista de figuras do modelo
     def mouse_solto(self, event): 
         self.ferramenta_desenho.mouse_solto(event)
 
+    #muda a cor da borda da figura
     def mudar_cor(self, cor):
 
         self.desenho.mudar_cor(cor)
 
+    #muda a cor de preenchimento da figura
     def mudar_preenchimento(self, cor):
 
         self.desenho.mudar_preenchimento(cor)

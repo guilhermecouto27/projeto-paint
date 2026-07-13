@@ -1,6 +1,6 @@
 import tkinter as tk
 
-
+#class PaintView é a classe que representa a interface gráfica do usuário (GUI) do aplicativo de desenho
 class PaintView(tk.Tk):
 
     def __init__(self):
