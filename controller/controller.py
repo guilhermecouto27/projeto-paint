@@ -4,6 +4,7 @@ from view.janelaPaint import *
 from model.figuras import *
 from model.desenho import *
 from controller.ferramenta import *
+from controller.controllerSelecao import ControladorSelecao
 
 # ControladorPaint é a classe que representa o controlador do aplicativo de desenho
 @dataclass
@@ -13,12 +14,15 @@ class ControladorPaint:
 
     def __post_init__(self) :
 
+        self.controlador_selecao = ControladorSelecao(self.visao, self.desenho, self.controlador_selecao) 
+
         self.ferramentas = {"linha":Linha_ferramenta(self.visao, self.desenho),
                             "rabisco":Rabisco_ferramenta(self.visao, self.desenho),
                         "retangulo": Retangulo_ferramenta(self.visao, self.desenho),
                         "quadrado": Quadrado_ferramenta(self.visao, self.desenho),
                         "oval": Oval_ferramenta(self.visao, self.desenho),
                         "circulo": Circulo_ferramenta(self.visao, self.desenho),
+                        "selecao" : Selecao_Ferramenta(self.visao, self.desenho, self.controlador_selecao)
 }
         self.ferramenta_desenho = self.ferramentas['retangulo']
         self.visao.set_controller(self)
@@ -31,6 +35,11 @@ class ControladorPaint:
         canvas.bind("<ButtonPress-1>", self.mouse_pressionado)
         canvas.bind("<B1-Motion>", self.mouse_arrastado)
         canvas.bind("<ButtonRelease-1>", self.mouse_solto)
+        canvas.bind("<Motion>", self.mouse_movido)
+        canvas.bind("<Button-1>", self.mouse_clicado, add="+")
+        canvas.bind("<Double-Button-1>", self.mouse_clicado_2)
+
+   
 
     # Ao mudar o option menu que escolhe a ferramenta de desenho
     def muda_ferramenta(self, *args) :
@@ -50,6 +59,15 @@ class ControladorPaint:
     #quando o mouse é solto, a figura é adicionada à lista de figuras do modelo
     def mouse_solto(self, event): 
         self.ferramenta_desenho.mouse_solto(event)
+
+    def mouse_clicado(self, event):
+        self.ferramenta_desenho.mouse_clicado(event)
+
+    def mouse_movido(self, event):
+        self.ferramenta_desenho.mouse_movido(event)   
+
+    def mouse_clicado_2(self, event) :
+        self.ferramenta_desenho.mouse_clicado_2(event) 
 
     #muda a cor da borda da figura
     def mudar_cor(self, cor):

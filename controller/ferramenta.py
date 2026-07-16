@@ -25,6 +25,15 @@ class Ferramenta(ABC) :
     @abstractmethod
     def mouse_solto(self, event) :
         pass
+    
+    def mouse_clicado(self, event):
+        pass
+
+    def mouse_movido(self, event):
+        pass
+
+    def mouse_clicado_2(self, event):
+        pass
 
 # --------LINHA-----------
 @dataclass
@@ -136,4 +145,17 @@ class Quadrado_ferramenta(Ferramenta) :
         if not self.quadrado_atual.vazia() :
             self.desenho.adiciona_figura(self.quadrado_atual)
         self.desenho.desenha_figuras(self.canvas)       
-    
+
+###################### Ferramenta Selecao ###################
+@dataclass
+class Selecao_Ferramenta(Ferramenta) :
+    controlador_selecao: object
+
+    def mouse_pressionado(self, event):
+        self.controlador_selecao.selecionar(event.x, event.y)
+
+    def mouse_arrastado(self, event):
+        pass
+
+    def mouse_solto(self, event):
+        pass

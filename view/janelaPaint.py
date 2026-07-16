@@ -87,7 +87,8 @@ class PaintView(tk.Tk):
             ("Círculo", "circulo"),
             ("Oval", "oval"),
             ("Linha", "linha"),
-            ("Rabisco", "rabisco")
+            ("Rabisco", "rabisco"),
+            ("Seleção" , "selecao")
 
         ]:
 
