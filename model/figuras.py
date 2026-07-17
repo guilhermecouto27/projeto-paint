@@ -76,16 +76,16 @@ class Linha(Figura):
     def pontos(self):
         return (self.x1, self.y1, self.x2, self.y2)
 
-    def desenha(self, canvas, dash=()):
+    def desenha(self, canvas, dash=(), width=1):
         if not self.vazia():
-            canvas.create_line(self.pontos, fill=self.cor, dash=dash)
+            canvas.create_line(self.pontos, fill=self.cor, dash=dash, width=width)
 
     def vazia(self):
         return self.x1 == self.x2 and self.y1 == self.y2
     
     def contem(self, x , y) :
-        return self.ini_x <= x <= self.fim_x and\
-               self.ini_y <= y <= self.fim_y
+        return self.x1 <= x <= self.x2 and\
+               self.y1 <= y <= self.y2
     
     def mover(self, dx, dy) :
         self.x1 += dx
@@ -100,9 +100,9 @@ class Rabisco(PoliPontos):
         super().__init__(pontos, cor, preenchimento)
 
 
-    def desenha(self, canvas, dash=()):
+    def desenha(self, canvas, dash=(), width = 1):
         if len(self.pontos) >= 4:
-            canvas.create_line(self.pontos, fill=self.cor, dash=dash)
+            canvas.create_line(self.pontos, fill=self.cor, dash=dash, width = width)
 
     def vazia(self):
         return len(self.pontos) < 4
@@ -122,8 +122,8 @@ class Retangulo(Figura):
         super().__init__(cor,preenchimento)
         self.x1=x1; self.y1=y1; self.x2=x2; self.y2=y2
 
-    def desenha(self,canvas,dash=()):
-        canvas.create_rectangle(self.x1,self.y1,self.x2,self.y2,outline=self.cor,fill=self.preenchimento,dash=dash)
+    def desenha(self,canvas,dash=(), width = 1):
+        canvas.create_rectangle(self.x1,self.y1,self.x2,self.y2,outline=self.cor,fill=self.preenchimento,dash=dash, width = width)
 
     def vazia(self):
         largura = abs(self.x2 - self.x1)
@@ -161,8 +161,8 @@ class Quadrado(Retangulo):
 
 #subclasse de figura que representa um oval
 class Oval(Retangulo):
-    def desenha(self,canvas,dash=()):
-        canvas.create_oval(self.x1,self.y1,self.x2,self.y2,outline=self.cor,fill=self.preenchimento,dash=dash)
+    def desenha(self,canvas,dash=(), width = 1):
+        canvas.create_oval(self.x1,self.y1,self.x2,self.y2,outline=self.cor,fill=self.preenchimento,dash=dash, width = width)
     def vazia(self) :
         largura = abs(self.x2 - self.x1)
         altura = abs(self.y2 - self.y1)
@@ -170,9 +170,9 @@ class Oval(Retangulo):
 
 #subclasse de figura que representa um círculo
 class Circulo(Retangulo):
-    def desenha(self,canvas,dash=()):
+    def desenha(self,canvas,dash=(), width = 1):
         r=min(abs(self.x2-self.x1),abs(self.y2-self.y1))
-        canvas.create_oval(self.x1,self.y1,self.x1+r,self.y1+r,outline=self.cor,fill=self.preenchimento,dash=dash)
+        canvas.create_oval(self.x1,self.y1,self.x1+r,self.y1+r,outline=self.cor,fill=self.preenchimento,dash=dash, width = width)
 
 # distancia entre o segmento ((x1,y1), (x2,y2)) e o ponto (px, py)
 def distancia(x1, y1, x2, y2, px, py) :

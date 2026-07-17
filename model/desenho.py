@@ -70,6 +70,51 @@ class PaintModel:
             return self.__formas[self.__selecionada]
         else :
             return None
+        
+        # Copiar/Colar
+    def copiar_selecionada(self) :
+        self.buffer = copy.deepcopy(self.selecionada())
+
+    def colar(self) :
+        if self.buffer != None :
+            f = self.buffer
+            f.mover(5, 5)
+            self.__formas.append(f)
+            self.buffer = copy.deepcopy(f)
+
+        #**** Operações sobre a figura selecionada
+
+    def selecionada_para_topo(self) :
+        s = self.__selecionada 
+        if s != -1 :
+            f = self.__formas.pop(s)
+            self.__formas.append(f)
+            self.__selecionada = len(self.__formas)-1
+        
+    def selecionada_para_fundo(self) :
+        s = self.__selecionada 
+        if s != -1 :
+            f = self.__formas.pop(s)
+            self.__formas.insert(0, f)
+            self.__selecionada = 0
+
+    def selecionada_para_tras(self) :
+        s = self.__selecionada 
+        if s > 0 :
+            self.__formas[s], self.__formas[s-1] = self.__formas[s-1], self.__formas[s]
+            self.__selecionada -= 1
+
+    def selecionada_para_frente(self) :
+        s = self.__selecionada 
+        if 0 <= s < len(self.__formas) - 1 :
+            self.__formas[s], self.__formas[s+1] = self.__formas[s+1], self.__formas[s]
+            self.__selecionada += 1
+
+    def apaga_selecionada(self) :
+        s = self.__selecionada 
+        if s != -1 :
+            self.__formas.pop(s)
+            self.__selecionada = -1
 
     # Persistência com pickle
 

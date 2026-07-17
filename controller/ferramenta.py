@@ -4,6 +4,7 @@ from tkinter import *
 from view.janelaPaint import PaintView
 from model.figuras import Linha, Oval, Circulo, Quadrado, Retangulo, Rabisco
 from model.desenho import PaintModel
+from controller.controllerSelecao import ControladorSelecao
 
 @dataclass
 # Ferramenta abstrata para desenho
@@ -25,7 +26,7 @@ class Ferramenta(ABC) :
     @abstractmethod
     def mouse_solto(self, event) :
         pass
-    
+
     def mouse_clicado(self, event):
         pass
 
@@ -149,13 +150,24 @@ class Quadrado_ferramenta(Ferramenta) :
 ###################### Ferramenta Selecao ###################
 @dataclass
 class Selecao_Ferramenta(Ferramenta) :
-    controlador_selecao: object
+    ult_x : int = 0
+    ult_y : int = 0
 
     def mouse_pressionado(self, event):
-        self.controlador_selecao.selecionar(event.x, event.y)
+        self.ult_x = event.x
+        self.ult_y = event.y
+        self.desenho.limpa_selecao()
+        self.desenho.seleciona(event.x, event.y)
+        self.desenho.desenha_figuras(self.canvas)
 
     def mouse_arrastado(self, event):
-        pass
+        figSel = self.desenho.selecionada()
+        if figSel :         
+            figSel.mover(event.x - self.ult_x, event.y - self.ult_y)
+            self.ult_x = event.x
+            self.ult_y = event.y
+            self.desenho.desenha_figuras(self.canvas)
 
     def mouse_solto(self, event):
         pass
+    

@@ -14,7 +14,7 @@ class ControladorPaint:
 
     def __post_init__(self) :
 
-        self.controlador_selecao = ControladorSelecao(self.visao, self.desenho, self.controlador_selecao) 
+        self.controlador_selecao = ControladorSelecao(self.visao, self.desenho) 
 
         self.ferramentas = {"linha":Linha_ferramenta(self.visao, self.desenho),
                             "rabisco":Rabisco_ferramenta(self.visao, self.desenho),
